@@ -1,23 +1,16 @@
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import { RootState, store } from './app/store';
-import { getTestNews } from './features/counter/newsSlice';
+import PageView from './containers/PageView';
+import { getTestNews } from './features/news/newsSlice';
+import MainPage from './pages/MainPage';
 
-function App() {
-
-  const dispatch = useDispatch<typeof store.dispatch>()
-  const news = useSelector((state: RootState)=> state.news.value);
-
-  useEffect(()=>{
-    dispatch(getTestNews());
-  },[])
-
+function App(): JSX.Element {
   return (
-    <div className="App">
-      <header className="App-header">
-      </header>
-    </div>
+    <PageView>
+      <MainPage />
+    </PageView>
   );
 }
 
