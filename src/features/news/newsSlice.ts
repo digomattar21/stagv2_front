@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from '../../app/store';
 import { fetchTestNews } from './newsAPI';
 
-interface News {
+export interface Article {
   title: string;
   source: string;
   description: string;
@@ -14,17 +14,26 @@ interface News {
 }
 
 export interface BreakingNewsState {
-  value: News[];
+  news: Article[];
   status: 'idle' | 'loading' | 'failed';
 }
 
 const initialState: BreakingNewsState = {
-  value: [],
+  news: [],
   status: 'idle',
 };
 
 export const getTestNews = createAsyncThunk('/news', async () => {
-  const response: any = await fetchTestNews();
+  let response: any = await fetchTestNews();
+  if (response.data && !response.data.articles) {
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 2);
+    response = await fetchTestNews({
+      from: yesterday.toISOString().split('T')[0],
+      to: today.toISOString().split('T')[0],
+    });
+  }
   return response.data;
 });
 
@@ -39,11 +48,11 @@ export const newsSlice = createSlice({
       })
       .addCase(getTestNews.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.value = action.payload.news;
+        state.news = action.payload.news;
       })
       .addCase(getTestNews.rejected, (state) => {
         state.status = 'failed';
-        state.value = [];
+        state.news = [];
       });
   },
 });

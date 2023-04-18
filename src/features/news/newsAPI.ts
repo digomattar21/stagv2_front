@@ -1,10 +1,16 @@
-import axios from "axios";
+import axios from 'axios';
 
-
-export async function fetchTestNews(): Promise<any> {
+export async function fetchTestNews(payload?: any): Promise<any> {
   try {
-    const uri = `${process.env.REACT_APP_BASE_URL}/news`;
-    console.log(uri)
+    let uri = `${process.env.REACT_APP_BASE_URL}/news`;
+    if (payload) {
+      const queryString: any = Object.entries(payload)
+        .map(([key, value]) => `${encodeURIComponent(key)}=${value}`)
+        .join('&');
+      uri = uri + '?' + queryString;
+    }
+
+    console.log(uri);
     return await axios.get(uri);
   } catch (error) {
     throw error;
