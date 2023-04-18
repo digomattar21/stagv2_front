@@ -10,7 +10,6 @@ export async function fetchTestNews(payload?: any): Promise<any> {
       uri = uri + '?' + queryString;
     }
 
-    console.log(uri);
     return await axios.get(uri);
   } catch (error) {
     throw error;

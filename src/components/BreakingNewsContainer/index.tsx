@@ -12,9 +12,7 @@ function BreakingNewsContainer({ flex }: BreakingNewsProps): JSX.Element {
     (state: RootState) => state.breakingNews
   );
 
-  useEffect(() => {
-    console.log('news', news, status);
-  }, [news]);
+  useEffect(() => {}, [news]);
 
   return (
     <div className="">
