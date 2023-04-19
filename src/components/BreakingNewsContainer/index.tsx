@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import BreakingNewsCard from '../BreakingNewsCard';
+import LoadingIcon from '../LoadingIcon';
 
 interface BreakingNewsProps {
   flex?: string;
@@ -15,11 +16,13 @@ function BreakingNewsContainer({ flex }: BreakingNewsProps): JSX.Element {
   useEffect(() => {}, [news]);
 
   return (
-    <div className="">
+    <>
       {status === 'idle' &&
         news.length &&
         news.map((item) => <BreakingNewsCard key={item.url} {...item} />)}
-    </div>
+        {status === 'loading' && <LoadingIcon/>}
+    </>
+
   );
 }
 
