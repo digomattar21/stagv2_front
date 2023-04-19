@@ -6,8 +6,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 
+
 const container = document.getElementById('root')!;
 document?.querySelector('body')?.classList.add('overflow-x-hidden');
+document?.querySelector('html')?.classList.add('h-full');
 const root = createRoot(container);
 
 root.render(

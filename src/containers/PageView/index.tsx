@@ -3,7 +3,7 @@ interface PageViewProps {
 }
 
 function PageView({ children }: PageViewProps) {
-  return <div className="w-screen h-screen box-border">{children}</div>;
+  return <div className="w-screen h-screen box-border bg-gray-800">{children}</div>;
 }
 
 export default PageView;
