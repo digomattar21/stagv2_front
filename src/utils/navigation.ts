@@ -20,7 +20,12 @@ export const teams = [
   { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
   { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
 ];
-export const userNavigation = [
+export const userNavigationLogged = [
   { name: 'Your profile', href: '#' },
   { name: 'Sign out', href: '#' },
+];
+
+export const userNavigation = [
+  { name: 'Log in', href: '#' },
+  { name: 'Sign up', href: '#' },
 ];
