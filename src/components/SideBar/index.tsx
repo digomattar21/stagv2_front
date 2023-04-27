@@ -39,6 +39,13 @@ export default function SideBar({ children }: { children: any }) {
     }
   }, [user]);
 
+  const toggleCurrent = (item: any) => {
+    navigate(`${item.href}`);
+    navigation.map((i) =>
+      i == item ? (i.current = true) : (i.current = false)
+    );
+  };
+
   return (
     <>
       <div className="bg-gray-900">
@@ -109,7 +116,7 @@ export default function SideBar({ children }: { children: any }) {
                             {navigation.map((item) => (
                               <li key={item.name}>
                                 <a
-                                  onClick={() => navigate(`${item.href}`)}
+                                  onClick={() => toggleCurrent(item)}
                                   className={classNames(
                                     item.current
                                       ? 'bg-gray-800 text-white'
@@ -191,7 +198,7 @@ export default function SideBar({ children }: { children: any }) {
                     {navigation.map((item) => (
                       <li key={item.name}>
                         <a
-                          onClick={() => navigate(`${item.href}`)}
+                          onClick={() => toggleCurrent(item)}
                           className={classNames(
                             item.current
                               ? 'bg-gray-800 text-white'
