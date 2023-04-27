@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import BreakingNewsCard from '../BreakingNewsCard';
-import LoadingIcon from '../LoadingIcon';
+import Spinner from '../Spinner';
 
 interface BreakingNewsProps {
   flex?: string;
@@ -20,9 +20,8 @@ function BreakingNewsContainer({ flex }: BreakingNewsProps): JSX.Element {
       {status === 'idle' &&
         news.length &&
         news.map((item) => <BreakingNewsCard key={item.url} {...item} />)}
-        {status === 'loading' && <LoadingIcon/>}
+      {status === 'loading' && <Spinner />}
     </>
-
   );
 }
 
