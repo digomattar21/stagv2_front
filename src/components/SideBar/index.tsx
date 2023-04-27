@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { Dialog, Menu, Transition } from '@headlessui/react';
 import {
   Bars3Icon,
-  BellIcon,
   Cog6ToothIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
@@ -11,8 +10,14 @@ import {
   ChevronDownIcon,
   MagnifyingGlassIcon,
 } from '@heroicons/react/20/solid';
-import { navigation, teams, userNavigation } from '../../utils/navigation';
+import {
+  sideNavigation,
+  userNavigation,
+  userLoggedNavigation,
+  sideNavigationLogged,
+} from '../../utils/navigation';
 import { RootState, store } from '../../app/store';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { logout } from '../../features/authentication/authSlice';
 
@@ -24,12 +29,22 @@ export default function SideBar({ children }: { children: any }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const dispatch = useAppDispatch();
   const user: any = useAppSelector((state: RootState) => state.auth.user);
+  const userMenu = user ? userLoggedNavigation : userNavigation;
+  const navigation = user ? sideNavigationLogged : sideNavigation;
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!user) {
       dispatch(logout());
     }
   }, [user]);
+
+  const toggleCurrent = (item: any) => {
+    navigate(`${item.href}`);
+    navigation.map((i) =>
+      i == item ? (i.current = true) : (i.current = false)
+    );
+  };
 
   return (
     <>
@@ -101,7 +116,7 @@ export default function SideBar({ children }: { children: any }) {
                             {navigation.map((item) => (
                               <li key={item.name}>
                                 <a
-                                  href={item.href}
+                                  onClick={() => toggleCurrent(item)}
                                   className={classNames(
                                     item.current
                                       ? 'bg-gray-800 text-white'
@@ -119,7 +134,7 @@ export default function SideBar({ children }: { children: any }) {
                             ))}
                           </ul>
                         </li>
-                        <li>
+                        {/* <li>
                           <div className="text-xs font-semibold leading-6 text-gray-400">
                             Your teams
                           </div>
@@ -143,10 +158,10 @@ export default function SideBar({ children }: { children: any }) {
                               </li>
                             ))}
                           </ul>
-                        </li>
+                        </li> */}
                         <li className="mt-auto">
                           <a
-                            href="#"
+                            onClick={() => navigate('/user/settings')}
                             className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
                           >
                             <Cog6ToothIcon
@@ -183,7 +198,7 @@ export default function SideBar({ children }: { children: any }) {
                     {navigation.map((item) => (
                       <li key={item.name}>
                         <a
-                          href={item.href}
+                          onClick={() => toggleCurrent(item)}
                           className={classNames(
                             item.current
                               ? 'bg-gray-800 text-white'
@@ -201,7 +216,7 @@ export default function SideBar({ children }: { children: any }) {
                     ))}
                   </ul>
                 </li>
-                <li>
+                {/* <li>
                   <div className="text-xs font-semibold leading-6 text-gray-400">
                     Your teams
                   </div>
@@ -225,10 +240,10 @@ export default function SideBar({ children }: { children: any }) {
                       </li>
                     ))}
                   </ul>
-                </li>
+                </li> */}
                 <li className="mt-auto">
                   <a
-                    href="#"
+                    onClick={() => navigate('/user/settings')}
                     className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
                   >
                     <Cog6ToothIcon
@@ -322,7 +337,7 @@ export default function SideBar({ children }: { children: any }) {
                     leaveTo="transform opacity-0 scale-95"
                   >
                     <Menu.Items className="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-gray-100 py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
-                      {userNavigation.map((item) => (
+                      {userMenu.map((item) => (
                         <Menu.Item key={item.name}>
                           {({ active }) => (
                             <a

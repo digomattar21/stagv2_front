@@ -9,6 +9,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AuthCheck from './utils/authCheck';
 import LoginForm from './pages/Login';
 import SignUpForm from './pages/SignUp';
+import SettingsPage from './pages/SettingsPage';
+import ArticlePage from './pages/ArticlePage';
 
 function App(): JSX.Element {
   const dispatch = useDispatch();
@@ -27,10 +29,13 @@ function App(): JSX.Element {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="/articles" element={<ArticlePage />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/user" element={<AuthCheck />}>
             <Route path="/user/main" element={<MainPage />} />
+            <Route path="/user/settings" element={<SettingsPage />} />
+            <Route path="/user/articles" element={<ArticlePage />} />
           </Route>
         </Routes>
       </BrowserRouter>

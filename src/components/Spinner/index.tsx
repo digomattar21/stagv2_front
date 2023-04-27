@@ -2,7 +2,7 @@ import React from 'react';
 
 const Spinner: React.FC<any> = (color: string | null) => {
   return (
-    <div role="status">
+    <div className="w-full flex justify-center" role="status">
       <svg
         aria-hidden="true"
         className={`w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 ${
