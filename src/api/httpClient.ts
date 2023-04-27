@@ -8,17 +8,26 @@ export default abstract class HttpClient {
   public constructor(baseURL: any) {
     this.instance = axios.create({
       baseURL,
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'x-api-key': 'UOFtwW7dTk6PloufJOkYEvXp3hzKn2xakqMY4kYa'
-    //   }
     });
 
     this.initializeResponseInterceptor();
+    this.setAuthorizationHeader();
   }
 
+  private setAuthorizationHeader = () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.instance.defaults.headers.common[
+        'Authorization'
+      ] = `Bearer ${token}`;
+    }
+  };
+
   public initializeResponseInterceptor = () => {
-    this.instance.interceptors.response.use(this.handleResponse, this.handleError);
+    this.instance.interceptors.response.use(
+      this.handleResponse,
+      this.handleError
+    );
   };
 
   public handleResponse = ({ data }: AxiosResponse) => data;
