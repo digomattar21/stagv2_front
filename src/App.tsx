@@ -11,6 +11,7 @@ import LoginForm from './pages/Login';
 import SignUpForm from './pages/SignUp';
 import SettingsPage from './pages/SettingsPage';
 import ArticlePage from './pages/ArticlePage';
+import SubmitArticlePage from './pages/SubmitArticlePage';
 
 function App(): JSX.Element {
   const dispatch = useDispatch();
@@ -36,6 +37,10 @@ function App(): JSX.Element {
             <Route path="/user/main" element={<MainPage />} />
             <Route path="/user/settings" element={<SettingsPage />} />
             <Route path="/user/articles" element={<ArticlePage />} />
+            <Route
+              path="/user/article-submission"
+              element={<SubmitArticlePage />}
+            />
           </Route>
         </Routes>
       </BrowserRouter>
