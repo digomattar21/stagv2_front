@@ -1,10 +1,7 @@
 import {
-  CalendarIcon,
-  ChartPieIcon,
   DocumentDuplicateIcon,
-  FolderIcon,
   HomeIcon,
-  UsersIcon,
+  NewspaperIcon,
 } from '@heroicons/react/24/outline';
 
 export let sideNavigation = [
@@ -15,7 +12,23 @@ export let sideNavigation = [
   {
     name: 'Articles',
     href: '/articles',
+    children: [
+      { name: 'Popular', href: '/articles' },
+      { name: 'Finances', href: '' },
+      // { name: 'Submit an article', href: '/article-submission' },
+    ],
     icon: DocumentDuplicateIcon,
+    current: false,
+  },
+  {
+    name: 'News',
+    href: '/news',
+    children: [
+      { name: 'Breaking', href: '/news' },
+      { name: 'Technology', href: '/news' },
+      { name: 'Politics', href: '/news' },
+    ],
+    icon: NewspaperIcon,
     current: false,
   },
   // { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
@@ -28,8 +41,24 @@ export let sideNavigationLogged = [
   // { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
   {
     name: 'Articles',
-    href: '/user/articles',
+    href: '/articles',
+    children: [
+      { name: 'Popular', href: '/articles' },
+      { name: 'Finances', href: '' },
+      { name: 'Submit an article', href: '/user/article-submission' },
+    ],
     icon: DocumentDuplicateIcon,
+    current: false,
+  },
+  {
+    name: 'News',
+    href: '/news',
+    children: [
+      { name: 'Breaking', href: '/news' },
+      { name: 'Technology', href: '/news' },
+      { name: 'Politics', href: '/news' },
+    ],
+    icon: NewspaperIcon,
     current: false,
   },
   // { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
