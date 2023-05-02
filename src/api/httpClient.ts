@@ -1,6 +1,4 @@
-/* eslint class-methods-use-this: "off" */
-import type { AxiosInstance, AxiosResponse } from 'axios';
-import axios from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 export default abstract class HttpClient {
   protected readonly instance: AxiosInstance;
@@ -8,19 +6,27 @@ export default abstract class HttpClient {
   public constructor(baseURL: any) {
     this.instance = axios.create({
       baseURL,
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
 
+    this.initializeRequestInterceptor();
     this.initializeResponseInterceptor();
-    this.setAuthorizationHeader();
   }
 
-  private setAuthorizationHeader = () => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      this.instance.defaults.headers.common[
-        'Authorization'
-      ] = `Bearer ${token}`;
-    }
+  public initializeRequestInterceptor = () => {
+    this.instance.interceptors.request.use((config: AxiosRequestConfig) => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        if (!config.headers) {
+          config.headers = {};
+        }
+        console.log('aqui');
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+      return config;
+    });
   };
 
   public initializeResponseInterceptor = () => {

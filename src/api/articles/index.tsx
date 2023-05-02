@@ -2,9 +2,9 @@ import type { AxiosRequestConfig } from 'axios';
 
 import HttpClient from '../httpClient';
 
-class NewsApi extends HttpClient {
+class ArticlesApi extends HttpClient {
   public constructor() {
-    super(`${process.env.NEWS_API_BASE_URL}`);
+    super(`${process.env.REACT_APP_BASE_URL}`);
     this.initializeRequestInterceptor();
   }
 
@@ -19,9 +19,9 @@ class NewsApi extends HttpClient {
     return config;
   };
 
-  public async getNewsTest(): Promise<any> {
-    return this.instance.get(`/news`);
+  public async submitArticles(payload: any): Promise<any> {
+    return this.instance.post(`/userArticles/articles-submission`, payload);
   }
 }
 
-export default new NewsApi();
+export default new ArticlesApi();
