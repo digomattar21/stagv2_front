@@ -21,6 +21,7 @@ import { RootState, store } from '../../app/store';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { logout } from '../../features/authentication/authSlice';
+import { isTokenValid } from '../../utils/checkToken';
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ');
@@ -34,9 +35,20 @@ export default function SideBar({ children }: { children: any }) {
   const navigation = user ? sideNavigationLogged : sideNavigation;
   const navigate = useNavigate();
 
+  const handleNavigation = (route: string) => {
+    dispatch({ type: 'NAVIGATE_TO', payload: route });
+    navigate(route, { replace: true });
+  };
+
   useEffect(() => {
     if (!user) {
-      dispatch(logout());
+      //Check tokens
+      const token: any = localStorage.getItem('token');
+      if (!token) {
+        dispatch(logout());
+      }
+      const isValid: any = isTokenValid(token);
+      isValid ? handleNavigation('/user/main') : dispatch(logout());
     }
   }, [user]);
 

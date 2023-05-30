@@ -1,5 +1,5 @@
 // components/LoginForm.tsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../../features/authentication/authSlice';
 import { AppDispatch, RootState } from '../../app/store';
@@ -15,6 +15,9 @@ const LoginForm: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<null | string>(null);
+  const isAuthenticated = useAppSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,6 +33,12 @@ const LoginForm: React.FC = () => {
       );
     }
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/user/main');
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center">
