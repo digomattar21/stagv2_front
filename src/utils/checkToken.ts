@@ -4,7 +4,7 @@ interface DecodedToken {
   exp: number;
 }
 
-export const isTokenValid = (token: string | null): boolean => {
+export const isTokenValid = (token: string | null): any => {
   if (!token) return false;
 
   try {
@@ -12,7 +12,7 @@ export const isTokenValid = (token: string | null): boolean => {
     if (Date.now() >= decodedToken.exp * 1000) {
       return false;
     }
-    return true;
+    return { valid: true, token: decodedToken };
   } catch (error) {
     console.error('Invalid token:', error);
     return false;
