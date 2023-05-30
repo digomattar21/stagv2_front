@@ -44,9 +44,17 @@ const LoginForm: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center">
       <div className="bg-gray-200 rounded-lg p-8 shadow-xl">
-        <h2 className="text-2xl font-bold text-center mb-6 text-gray-900">
-          Login
-        </h2>
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm mb-4">
+          <img
+            className="mx-auto h-10 w-auto"
+            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+            alt="Your Company"
+            onClick={() => navigate('/')}
+          />
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            Sign in to your account
+          </h2>
+        </div>
         <div className="w-full p-4">
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
@@ -85,9 +93,18 @@ const LoginForm: React.FC = () => {
               type="submit"
               className="w-full py-2 text-sm font-semibold text-gray-200 bg-indigo-600 rounded-md hover:bg-indigo-500 text-center flex justify-center"
             >
-              {loading ? <Spinner color={'fill-white'} /> : 'Sign Up'}
+              {loading ? <Spinner color={'fill-white'} /> : 'Log In'}
             </button>
           </form>
+          <p className="mt-10 text-center text-sm text-gray-500">
+            Not a member?{' '}
+            <a
+              onClick={() => navigate('/signup')}
+              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+            >
+              Sign Up
+            </a>
+          </p>
           {error && (
             <p
               className="text-sm text-red-500 mt-2 text-center"
