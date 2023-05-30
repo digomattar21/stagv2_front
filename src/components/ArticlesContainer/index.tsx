@@ -9,7 +9,9 @@ function ArticlesContainer(): JSX.Element {
     (state: RootState) => state.articles
   );
 
-  useEffect(() => {}, [articles]);
+  useEffect(() => {
+    console.log(articles);
+  }, [articles]);
 
   return (
     <>

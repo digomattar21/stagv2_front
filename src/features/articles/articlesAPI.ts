@@ -20,3 +20,12 @@ export async function submitArticle(payload?: any): Promise<any> {
     throw error;
   }
 }
+
+export async function fetchSubmittedArticles(): Promise<any> {
+  try {
+    const articlesApi: any = ArticlesApi;
+    return await articlesApi.getSubmittedArticles();
+  } catch (error) {
+    throw error;
+  }
+}
