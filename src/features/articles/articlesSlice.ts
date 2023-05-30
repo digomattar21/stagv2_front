@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchMainArticles } from './articlesAPI';
+import { fetchMainArticles, submitArticle } from './articlesAPI';
 
 export interface Article {
   category: string;
@@ -28,6 +28,14 @@ export const getMainArticles = createAsyncThunk('/articles', async () => {
 
   return response.data.articles;
 });
+
+export const postSubmitArticles = createAsyncThunk(
+  '/userArticles/article-submission',
+  async (payload: any) => {
+    const response: any = await submitArticle(payload);
+    return response;
+  }
+);
 
 export const articleSlice = createSlice({
   name: 'articles',

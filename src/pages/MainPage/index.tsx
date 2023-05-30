@@ -15,8 +15,6 @@ const MainPage: React.FC = () => {
     (state: RootState) => state.auth.isAuthenticated
   );
 
-  const { status } = useSelector((state: RootState) => state.breakingNews);
-
   useEffect(() => {
     dispatch(getTestNews());
   }, []);
