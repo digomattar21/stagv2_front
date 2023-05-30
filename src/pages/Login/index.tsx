@@ -1,7 +1,7 @@
 // components/LoginForm.tsx
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../../features/authentication/authSlice';
+import { loginUser, setLogin } from '../../features/authentication/authSlice';
 import { AppDispatch, RootState } from '../../app/store';
 import { unwrapResult } from '@reduxjs/toolkit';
 import Spinner from '../../components/Spinner';
@@ -25,8 +25,9 @@ const LoginForm: React.FC = () => {
     try {
       const resultAction = await dispatch(loginUser({ email, password }));
       const response = unwrapResult(resultAction);
-      console.log('Login successful:', response);
-      navigate('/user/main');
+      dispatch(setLogin(response));
+      console.log(response);
+      navigate(response?.user?.admin ? '/admin/main' : '/user/main');
     } catch (err: any) {
       setError(
         err.message || 'An error occurred while logging in. Please try again.'

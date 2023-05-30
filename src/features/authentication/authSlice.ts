@@ -7,6 +7,7 @@ const initialState = {
   isAuthenticated: false,
   loading: false,
   user: null,
+  isAdmin: false,
 };
 
 export const loginUser = createAsyncThunk(
@@ -88,6 +89,7 @@ const authSlice = createSlice({
     logout: (state) => {
       localStorage.removeItem('token');
       state.token = null;
+      state.user = null;
       state.isAuthenticated = false;
       state.loading = false;
     },
@@ -96,6 +98,7 @@ const authSlice = createSlice({
     },
     setLogin: (state, action: PayloadAction<any>) => {
       state.user = action.payload.user;
+      state.isAdmin = action.payload.user.admin;
       state.isAuthenticated = true;
       state.token = action.payload.token;
     },

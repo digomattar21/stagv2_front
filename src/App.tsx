@@ -17,6 +17,8 @@ import SettingsPage from './pages/SettingsPage';
 import ArticlePage from './pages/ArticlePage';
 import SubmitArticlePage from './pages/SubmitArticlePage';
 import NotFound from './pages/NotFound';
+import LogOut from './components/LogOut';
+import AdminArticlesPage from './pages/AdminArticlesPage';
 
 function App(): JSX.Element {
   const dispatch = useDispatch();
@@ -39,6 +41,7 @@ function App(): JSX.Element {
           <Route path="/articles" element={<ArticlePage />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/signup" element={<SignUpForm />} />
+          <Route path="/logout" element={<LogOut />} />
 
           {/* Authenticated routes */}
           <Route path="/user/*" element={<AuthCheck />}>
@@ -46,6 +49,9 @@ function App(): JSX.Element {
             <Route path="settings" element={<SettingsPage />} />
             <Route path="articles" element={<ArticlePage />} />
             <Route path="article-submission" element={<SubmitArticlePage />} />
+          </Route>
+          <Route path="/admin/*" element={<AuthCheck />}>
+            <Route path="main" element={<AdminArticlesPage />} />
           </Route>
 
           {/* Redirect unauthenticated users to the login page */}

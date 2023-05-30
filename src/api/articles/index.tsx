@@ -25,6 +25,9 @@ class ArticlesApi extends HttpClient {
   public async submitArticles(payload: any): Promise<any> {
     return this.instance.post(`/userArticles/articles-submission`, payload);
   }
+  public async getSubmittedArticles(): Promise<any> {
+    return this.instance.get(`/userArticles/admin/submitted`);
+  }
 }
 
 export default new ArticlesApi();
