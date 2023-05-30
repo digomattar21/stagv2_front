@@ -33,8 +33,6 @@ export const postSubmitArticles = createAsyncThunk(
   '/userArticles/article-submission',
   async (payload: any) => {
     const response: any = await submitArticle(payload);
-    console.log('res', response);
-
     return response;
   }
 );

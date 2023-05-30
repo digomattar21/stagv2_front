@@ -14,7 +14,7 @@ export async function fetchMainArticles(payload?: any): Promise<any> {
 export async function submitArticle(payload?: any): Promise<any> {
   try {
     const articlesApi: any = ArticlesApi;
-    console.log(payload);
+    console.log('payload req body', payload);
     return await articlesApi.submitArticles(payload);
   } catch (error) {
     throw error;

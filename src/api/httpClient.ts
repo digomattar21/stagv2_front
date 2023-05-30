@@ -6,9 +6,6 @@ export default abstract class HttpClient {
   public constructor(baseURL: any) {
     this.instance = axios.create({
       baseURL,
-      headers: {
-        'Content-Type': 'application/json',
-      },
     });
 
     this.initializeRequestInterceptor();

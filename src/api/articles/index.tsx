@@ -16,6 +16,9 @@ class ArticlesApi extends HttpClient {
   };
 
   private handleRequest = (config: AxiosRequestConfig | any) => {
+    if (config) {
+      config.headers['Content-Type'] = 'multipart/form-data';
+    }
     return config;
   };
 
